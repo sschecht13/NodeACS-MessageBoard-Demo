@@ -27,7 +27,7 @@ JSON files cannot be commented so the following section is directed at the confi
        	and call it when needed "next();"                                                                                      
 	- Route callbacks are looked for using the following theme: "callback" : "myRouteFile#myRouteCallbackFunction"              
 
-	Objects in the "filters" array will be executed in order BEFORE any "routes", they always use the "all" method               
+	-Objects in the "filters" array will be executed in order BEFORE any "routes", they always use the "all" method               
  		- meaning they will match any method                                                                             
 
 
