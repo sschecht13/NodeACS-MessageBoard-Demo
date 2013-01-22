@@ -1,0 +1,105 @@
+<html lng="en">
+<head>
+	<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+	<title>Home</title>
+	<style>
+
+	</style>
+</head>
+<body>
+	<div class="alert alert-block alert-success fade in">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<label>Welcome: <%= username %></label>
+	</div>
+	<div class="accordion" id="accordion1">
+		<div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+        New Post
+      </a>
+    </div>
+    <div id="collapseTwo" class="accordion-body collapse">
+      <div class="accordion-inner">
+      	<label>Title:</label>
+      	<input id="newMessageTitle" type="text">
+      	<label>Post:</label>
+        <textarea id="newMessageContent"></textarea>
+        <label></label>
+        <button class="btn" id="newMessageSubmit">Submit</button>
+      </div>
+    </div>
+  </div>
+	</div>
+	
+	<div id="messagesDiv" style="clear:both;"></div>
+	<div style="background-color:red;width:30%;left:0;">
+	<div class="pagination" style="position:absolute;padding-bottom:10px;margin-left:10px">
+		<ul id="paginationList">
+
+		</ul>
+	</div>
+	</div>
+
+</body>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$.get('getMessages/1', function(data){
+		console.log('got messages');
+		var _respData = JSON.parse(data);
+		addMessages(_respData);
+	})
+
+	$('#newMessageSubmit').click(function(){
+		//$('#accordion1').toggle();
+		$.post('postNewMessage', {
+			newMessageTitle : $('#newMessageTitle').val(),
+			newMessageContent : $('#newMessageContent').val()
+		}, function(data){
+			$('#collapseTwo').collapse('hide');
+			console.log('message posted');
+			var respData = JSON.parse(data);
+			if(respData.success){
+				console.log('getting messages');
+				$.get('getMessages/1', function(data){
+					console.log('got messages');
+					var _respData = JSON.parse(data);
+					addMessages(_respData);
+				})
+			}
+		})
+	})
+
+	$('.pageNumber').live(function(){
+		$.get('getMessages/' + $(this).attr('page'), function(data){
+			console.log('got messages');
+			var _respData = JSON.parse(data);
+			addMessages(_respData);
+		})
+	})
+
+	function addMessages(respData){
+		$('#messagesDiv').html('');
+		console.log(JSON.stringify(respData));
+		for(var x in respData.posts){
+			var html = '<pre style="width:30%;margin-left:5px;">'
+			html += '<label><strong>' + respData.posts[x].title + '</strong></label>';
+			html += '<label>' + respData.posts[x].content + '</label>';
+			html += '</pre>'//'</div>';
+
+			$('#messagesDiv').append(html);
+		}
+		$('#paginationList').html('');
+		$('#paginationList').append('<li><a href="">&laquo;</a></li>');
+		for(var t=1; t<=respData.meta.total_pages;t++){
+			var html = '<li><a class="pageNumber page="' + t + '" href="">' + t + '</a></li>';
+
+			$('#paginationList').append(html);
+		}
+		$('#paginationList').append('<li><a href="">&raquo;</a></li>');
+	}
+
+})
+</script>
+</html>

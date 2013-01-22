@@ -1,0 +1,19 @@
+{
+  "routes":
+  [
+    { "path": "/index", "callback": "application#index" },
+    { "path": "/login", "method": "post", "callback": "application#login"},
+    { "path": "/home", "callback": "application#home"},
+    { "path": "/newAccount", "method": "post", "callback": "application#newAccount"},
+    { "path": "/getMessages/:page", "callback": "application#getMessages"},
+    { "path": "/postNewMessage", "method": "post", "callback": "application#postNewMessage"}
+  ],
+  "filters":
+  [
+  	 { "path": "/", "callback": "filters#checkSession" }
+  ],
+  "websockets":
+  [
+  	{ "event": "", "callback": ""}
+  ]
+}

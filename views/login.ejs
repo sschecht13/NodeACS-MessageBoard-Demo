@@ -1,0 +1,78 @@
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"
+<html>
+<head>
+	<title>Welcome</title>
+</head>
+<body>
+	<div class="hero-unit">
+<form method="post" action="login">
+	<fieldset>
+		<legend>Login</legend>
+		<label>Username:</label>
+		<input type="text" name="login">
+		<label>Password:</label>
+		<input type="password" name="password">
+		<label></label>
+		<button type="submit" class="btn">Submit</button>
+	</fieldset>
+</form>
+<label><a id="createNewAccount" href="#">Create a new account</a></label>
+	<% if(flash.error){ %>
+		<div class="alert alert-block alert-error fade in">
+			<%- flash.error %>
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+	<% } %>
+</div>
+<div class="modal hide fade" id="newAccountModal">
+	<div class="modal-header">Create a new account</div>
+	<div class="modal-body">
+	<form>
+		<label>Email Address:</label>
+		<input type="text" name="email">
+		<label>Password:</label>
+		<input type="password" name="newPassword">
+		<label>Confirm Password:</label>
+		<input type="password" name="confirm">
+		</div>
+	</form>
+		<div class="modal-footer">
+			<button class="btn" id="modalClose">Close</button>
+			<button class="btn btn-primary" id="modalSubmit">Submit</button>
+		</div>
+</div>
+</body>
+</html>
+
+
+<script type="text/javascript">
+	$(function(){
+		$('#createNewAccount').click(function(){
+			$('#newAccountModal').modal('show');
+		})
+
+		$('#modalClose').click(function(){
+			$('#newAccountModal').modal('hide');
+		})
+
+		$('#modalSubmit').click(function(){
+			$.post('newAccount', {
+				email : $('input[name="email"]').val(),
+				password : $('input[name="newPassword"]').val(),
+				password_confirmation : $('input[name="confirm"]').val()
+			}, function(data){
+				console.log(data);
+				var respData = JSON.parse(data);
+				if(respData.success){
+					$('#newAccountModal').modal('hide');
+					window.location = 'home';
+				} else {
+
+				}
+			})
+		})
+
+	})
+</script>
