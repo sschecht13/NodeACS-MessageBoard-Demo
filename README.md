@@ -28,12 +28,12 @@ JSON files cannot be commented so the following section is directed at the confi
 	- Route callbacks are looked for using the following theme: "callback" : "myRouteFile#myRouteCallbackFunction"              
 
 	Objects in the "filters" array will be executed in order BEFORE any "routes", they always use the "all" method               
- 	 - meaning they will match any method                                                                             
+ 		- meaning they will match any method                                                                             
 
 
 A live version of this app is available at                                                                                    
 
 Written by:
-Sam Schechter
+Sam Schechter,
 Clearly Innovative
 		
