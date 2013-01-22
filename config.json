@@ -1,7 +1,7 @@
 {
   "routes":
   [
-    { "path": "/index", "callback": "application#index" },
+    { "path": "/", "callback": "application#index" },
     { "path": "/login", "method": "post", "callback": "application#login"},
     { "path": "/home", "callback": "application#home"},
     { "path": "/newAccount", "method": "post", "callback": "application#newAccount"},
@@ -10,7 +10,7 @@
   ],
   "filters":
   [
-  	 { "path": "/", "callback": "filters#checkSession" }
+  	 { "path": "", "callback": "" }
   ],
   "websockets":
   [
