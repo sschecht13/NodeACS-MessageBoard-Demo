@@ -31,7 +31,7 @@ JSON files cannot be commented so the following section is directed at the confi
  		- meaning they will match any method                                                                             
 
 
-A live version of this app is available at                                                                                    
+A live version of this app is available at http://4f6bd9adad928cff49bb8b5981c7669a7f6a64b9.cloudapp-preview2.appcelerator.com                                                                                 
 
 Written by:
 Sam Schechter,
