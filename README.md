@@ -18,20 +18,20 @@ The site will be available at http://localhost:<PORT> (typically 8080);
 
 Other notes:
 
-JSON files cannot be commented so the following section is directed at the config.json file
-	- All routes by default use the "get" request
-	- A different request type can be declared in the route object using "method" : "<METHOD>"
-	- Strings can be passed into the route with myroute/:mystring and then caught using req.params.mystring
-	- Routes are matched and executed in the order they are listed in the array
-     	- to move on to the next matching route, catch the next function in the route callback "function(req, res, next){.."
-       	and call it when needed "next();"
-	- Route callbacks are looked for using the following theme: "callback" : "myRouteFile#myRouteCallbackFunction"
+JSON files cannot be commented so the following section is directed at the config.json file                                          
+	- All routes by default use the "get" request                                                                         
+	- A different request type can be declared in the route object using "method" : "<METHOD>"                                                
+	- Strings can be passed into the route with myroute/:mystring and then caught using req.params.mystring                                    
+	- Routes are matched and executed in the order they are listed in the array                                                                
+     	- to move on to the next matching route, catch the next function in the route callback "function(req, res, next){.."         
+       	and call it when needed "next();"                                                                                      
+	- Route callbacks are looked for using the following theme: "callback" : "myRouteFile#myRouteCallbackFunction"              
 
-	Objects in the "filters" array will be executed in order BEFORE any "routes", they always use the "all" method
- 	 - meaning they will match any method
+	Objects in the "filters" array will be executed in order BEFORE any "routes", they always use the "all" method               
+ 	 - meaning they will match any method                                                                             
 
 
-A live version of this app is available at 
+A live version of this app is available at                                                                                    
 
 Written by:
 Sam Schechter
