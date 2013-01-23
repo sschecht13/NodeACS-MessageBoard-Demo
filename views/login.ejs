@@ -1,14 +1,14 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css"
+<link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
 <html>
 <head>
 	<title>Welcome</title>
 </head>
 <body>
 	<div class="hero-unit">
-<form method="post" action="login">
-	<fieldset>
+<form method="post" action="login">  <!-- 'action' points to the route that will be called on submit -->
+	<fieldset>						 <!-- forms will automatically transfer window control to the route when submitted -->
 		<legend>Login</legend>
 		<label>Username:</label>
 		<input type="text" name="login">
@@ -58,21 +58,18 @@
 		})
 
 		$('#modalSubmit').click(function(){
-			$.post('newAccount', {
+			$.post('newAccount', { 			 // Call account creation route with neccessary data
 				email : $('input[name="email"]').val(),
 				password : $('input[name="newPassword"]').val(),
 				password_confirmation : $('input[name="confirm"]').val()
-			}, function(data){
-				console.log(data);
+			}, function(data){  			//callback handles success or error conditions
 				var respData = JSON.parse(data);
 				if(respData.success){
 					$('#newAccountModal').modal('hide');
-					window.location = 'home';
-				} else {
-
-				}
-			})
-		})
+					window.location = 'home'; // to release control of the window this view
+				}							  // must set the window.location to the route which will
+			})								  // render the new view
+		})									  // NOTE:: form submission does this automatically
 
 	})
 </script>

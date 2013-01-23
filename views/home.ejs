@@ -45,24 +45,21 @@
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(function(){
-	$.get('getMessages/1', function(data){
-		console.log('got messages');
-		var _respData = JSON.parse(data);
+	$.get('getMessages/1', function(data){ //This ajax call goes to the route and // Page number is sent as a param
+										   // returns with JSON data for the posts
+		var _respData = JSON.parse(data);  // Data is returned as a string that must be parsed
 		addMessages(_respData);
 	})
 
 	$('#newMessageSubmit').click(function(){
-		$.post('postNewMessage', {
+		$.post('postNewMessage', {    // POST ajax call sends data along with the request
 			newMessageTitle : $('#newMessageTitle').val(),
 			newMessageContent : $('#newMessageContent').val()
 		}, function(data){
 			$('#collapseTwo').collapse('hide');
-			console.log('message posted');
 			var respData = JSON.parse(data);
-			if(respData.success){
-				console.log('getting messages');
+			if(respData.success){  // Route will return with success or error, conditions are handled here in the view
 				$.get('getMessages/1', function(data){
-					console.log('got messages');
 					var _respData = JSON.parse(data);
 					addMessages(_respData);
 				})
@@ -70,9 +67,8 @@ $(function(){
 		})
 	})
 
-	$('.pageNumber').live(function(){
+	$('.pageNumber').live(function(){ // When a page number is clicked, call getMessages route with the correct page as a param
 		$.get('getMessages/' + $(this).attr('page'), function(data){
-			console.log('got messages');
 			var _respData = JSON.parse(data);
 			addMessages(_respData);
 		})
@@ -80,7 +76,6 @@ $(function(){
 
 	function addMessages(respData){
 		$('#messagesDiv').html('');
-		console.log(JSON.stringify(respData));
 		for(var x in respData.posts){
 			var html = '<pre style="width:30%;margin-left:5px;">'
 			html += '<label><strong>' + respData.posts[x].title + '</strong></label>';
